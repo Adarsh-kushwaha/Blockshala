@@ -1,0 +1,7 @@
+/my-app/node_modules
+/strapi/node_modules
+/node_modules
+node_modules
+
+.env
+/my-app/.env
