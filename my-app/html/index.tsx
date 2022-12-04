@@ -7,6 +7,10 @@ const api = axios.create({
   },
 });
 
+export const getCatData = async ()=> await (await fetch(`http://localhost:1337/api/categories`))
+
+
 export const fetchCategories = async () => api.get("/api/categories");
 
-export const fetchArticles = async () => api.get("/api/articles?populate=*");
+export const fetchArticles = async (queryString: String) =>
+  api.get(`/api/articles?${queryString}`);

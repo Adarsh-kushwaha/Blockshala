@@ -1,10 +1,12 @@
 import React from "react";
+import qs from "qs";
 import { GetServerSideProps, NextPage } from "next";
-import { fetchCategories, fetchArticles } from "../html";
+import { fetchCategories, fetchArticles, getCatData } from "../html";
 import { AxiosResponse } from "axios";
 import { ICategories, ICollectionResponse, IArticle } from "../types";
 import Tabs from "../components/Tabs";
 import Article from "../components/Article";
+import { useQuery } from "react-query";
 
 interface IPropTypes {
   categories: {
@@ -29,10 +31,18 @@ const Home: NextPage<IPropTypes> = ({ categories, articles }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const options = {
+    populate: ["author.avatar"],
+    sort: ["id:desc"],
+  };
+
+  const queryString = qs.stringify(options);
+  // console.log(queryString);
+
   //articles
   const { data: articles }: AxiosResponse<ICollectionResponse<IArticle[]>> =
-    await fetchArticles();
-  console.log(articles);
+    await fetchArticles(queryString);
+  // console.log(articles);
 
   //categories
   const {

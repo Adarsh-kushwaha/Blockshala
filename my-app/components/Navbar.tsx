@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import logo from "../public/logo.png";
+import tw from "twin.macro";
 
 const Navbar = () => {
+  const Nav = tw.nav`flex flex-row items-center justify-between py-4`;
+
   return (
-    <nav className="flex flex-row items-center justify-between py-4">
+    <Nav>
       <Link href="/">
         <Image src={logo} alt="logo" width={200} />
       </Link>
@@ -31,7 +34,7 @@ const Navbar = () => {
           Signup
         </button>
       </div>
-    </nav>
+    </Nav>
   );
 };
 

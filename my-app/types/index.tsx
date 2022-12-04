@@ -40,8 +40,7 @@ export interface IImageData {
 export interface IAuthor {
   data: {
     attributes: {
-      firstname: string;
-      lastname: string;
+      username: string;
       avatar: {
         data: {
           attributes: {

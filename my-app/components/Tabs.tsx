@@ -10,7 +10,7 @@ interface IPropType {
 
 const Tabs = ({ categories }: IPropType) => {
   const router = useRouter();
-
+  
   const isActiveLink = (category: ICategories) => {
     return category.attributes.slug === router.query.category;
   };
