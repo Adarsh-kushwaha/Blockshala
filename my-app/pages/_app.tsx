@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { GlobalStyles } from "twin.macro";
 import tw from "twin.macro";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
@@ -13,14 +14,17 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyles />
-      <ContDiv>
-        <Navbar />
-        <main>
-          <Component {...pageProps} />
-        </main>
-        <Footer />
-      </ContDiv>
+      <Hydrate state={pageProps.dehydratedState}>
+        <GlobalStyles />
+        <ContDiv>
+          <Navbar />
+          <main>
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </ContDiv>
+      </Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
